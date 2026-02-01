@@ -18,8 +18,8 @@ async def get_all_resource_data(resource):
     result = query("{0}/{1}/".format(API_URL, resource))
     return result.json()
 
-@router.get("/people/{id}")
-async def get_people(id):
+@router.get("/person/{id}")
+async def get_person(id):
     result = _fetch(resources.PEOPLE, id)
     return result.json()
 
