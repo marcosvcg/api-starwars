@@ -1,0 +1,1 @@
+### Processo Seletivo - PowerOfData | Caste Técnico: Avaliação para Cargo de Desenvolvedor Back End Python
