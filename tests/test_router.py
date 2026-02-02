@@ -4,9 +4,11 @@ from main import app
 client = TestClient(app)
 
 def test_get_all_resource_data():
-    response = client.get("/people")
+    response = client.get("/people/?page=1")
     assert response.status_code == 200
     assert response.json()["count"] == 82
+    assert response.json()["previous"] == None
+    assert response.json()["next"] == 2
     
 def test_get_person():
     response = client.get("/person/1")

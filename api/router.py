@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from api.utils import query
 from api import resources
+import math
 
 router = APIRouter()
 API_URL = "https://swapi.dev/api/"
@@ -14,9 +15,15 @@ def _fetch(resource: resources, id):
     return result
 
 @router.get("/{resource}")
-async def get_all_resource_data(resource):
-    result = query("{0}/{1}/".format(API_URL, resource))
-    return result.json()
+async def get_all_resource_data(resource, page: int = 1):
+    result = query("{0}/{1}/?page={2}".format(API_URL, resource, page))
+    data = result.json()
+
+    pages = math.ceil(data['count'] / 10)
+    data["next"] = page + 1 if page < pages else None
+    data["previous"] = page - 1 if page > 1 else None
+
+    return data
 
 @router.get("/person/{id}")
 async def get_person(id):
