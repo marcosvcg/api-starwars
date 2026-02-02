@@ -15,8 +15,21 @@ def _fetch(resource: resources, id):
     return result
 
 @router.get("/{resource}")
-async def get_all_resource_data(resource, page: int = 1):
-    result = query("{0}/{1}/?page={2}".format(API_URL, resource, page))
+async def get_all_resource_data(
+    resource,
+    page: int = 1,
+    search: str | None = None
+):
+    url = f"{API_URL}/{resource}/"
+
+    params = {
+        "page": page
+    }
+
+    if search:
+        params["search"] = search
+
+    result = query(url, params=params)
     data = result.json()
 
     pages = math.ceil(data['count'] / 10)

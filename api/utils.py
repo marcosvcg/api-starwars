@@ -1,9 +1,8 @@
 from fastapi import HTTPException
 import requests
 
-def query(query):
-    headers = {"Content-Type": "application/json"}
-    response = requests.get(query, headers=headers)
+def query(url: str, params: dict | None = None):
+    response = requests.get(url, params=params)
     if response.status_code != 200:
         raise HTTPException(
             status_code=404,

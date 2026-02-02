@@ -9,6 +9,10 @@ def test_get_all_resource_data():
     assert response.json()["count"] == 82
     assert response.json()["previous"] == None
     assert response.json()["next"] == 2
+
+    response = client.get("/people/?search=vader")
+    assert response.status_code == 200
+    assert response.json()["results"][0]["name"] == "Darth Vader"
     
 def test_get_person():
     response = client.get("/person/1")
