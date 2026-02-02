@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from api.utils import query
+from api.utils import query, build_params
 from api import resources
 import math
 
@@ -21,19 +21,12 @@ async def get_all_resource_data(
     search: str | None = None
 ):
     url = f"{API_URL}/{resource}/"
+    params = build_params(page=page, search=search)
 
-    params = {
-        "page": page
-    }
+    data = query(url, params=params).json()
 
-    if search:
-        params["search"] = search
-
-    result = query(url, params=params)
-    data = result.json()
-
-    pages = math.ceil(data['count'] / 10)
-    data["next"] = page + 1 if page < pages else None
+    total_pages = math.ceil(data['count'] / 10)
+    data["next"] = page + 1 if page < total_pages else None
     data["previous"] = page - 1 if page > 1 else None
 
     return data

@@ -9,3 +9,6 @@ def query(url: str, params: dict | None = None):
             detail="Resource not found."
         )
     return response
+
+def build_params(**kwargs):
+    return {k: v for k, v in kwargs.items() if v is not None}
