@@ -23,6 +23,15 @@ def test_get_person():
     assert data["height"] == "172"
     assert data["mass"] == "77"
 
+def test_get_person_starships():
+    response = client.get("/person/1/starships")
+    assert response.status_code == 200
+    assert len(response.json()) == 2
+
+    response = client.get("/person/2/starships")
+    assert response.status_code == 200
+    assert len(response.json()) == 0
+
 def test_get_film():
     response = client.get("/film/2")
     assert response.status_code == 200

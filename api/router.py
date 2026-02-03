@@ -39,7 +39,8 @@ async def get_person(id):
 
 @router.get("/person/{id}/starships")
 def person_starships(id: int):
-    person = get_person(id)
+    result = _fetch(Resources.PEOPLE, id)
+    person = Person(result.content)
     starships = person.get_starships()
     return starships.to_list()
 
