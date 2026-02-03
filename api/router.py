@@ -1,13 +1,12 @@
 from fastapi import APIRouter
 from api.resources import Person, Film, Starship, Vehicle, Specie, Planet
-from api.utils import query, build_params
+from api.utils import query, build_params, paginate_data
 from api.resources import Resources
-import math
 
 router = APIRouter()
 API_URL = "https://swapi.dev/api/"
 
-def _fetch(resource: Resources, id):
+def _fetch(resource: Resources, id: int):
     result = query("{0}/{1}/{2}".format(
         API_URL,
         resource,
@@ -23,14 +22,9 @@ async def get_all_resource_data(
 ):
     url = f"{API_URL}/{resource}/"
     params = build_params(page=page, search=search)
-
     data = query(url, params=params).json()
 
-    total_pages = math.ceil(data['count'] / 10)
-    data["next"] = page + 1 if page < total_pages else None
-    data["previous"] = page - 1 if page > 1 else None
-
-    return data
+    return paginate_data(data, page)
 
 @router.get("/person/{id}")
 async def get_person(id):
