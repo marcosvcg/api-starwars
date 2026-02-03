@@ -13,43 +13,69 @@ class Resources(StrEnum):
 
 
 class Person(BaseModel):
+    def get_films(self):
+        return FilmQuerySet(self.films)
+
+    def get_vehicles(self):
+        return VehicleQuerySet(self.vehicles)
+
     def get_starships(self):
         return StarshipQuerySet(self.starships)
 
-class PersonQuerySet(BaseQuerySet):
+class PeopleQuerySet(BaseQuerySet):
     model = Person
 
 
 class Film(BaseModel):
-    pass
+    def get_characters(self):
+        return PeopleQuerySet(self.characters)
+
+    def get_planets(self):
+        return PlanetQuerySet(self.planets)
+
+    def get_species(self):
+        return SpecieQuerySet(self.species)
 
 class FilmQuerySet(BaseQuerySet):
     model = Film
 
 
 class Starship(BaseModel):
-    pass
+    def get_pilots(self):
+        return PeopleQuerySet(self.pilots)
+
+    def get_films(self):
+        return FilmQuerySet(self.films)
 
 class StarshipQuerySet(BaseQuerySet):
     model = Starship
 
 
 class Vehicle(BaseModel):
-    pass
+    def get_pilots(self):
+        return PeopleQuerySet(self.pilots)
+
+    def get_films(self):
+        return FilmQuerySet(self.films)
 
 class VehicleQuerySet(BaseQuerySet):
     model = Vehicle
 
 
 class Specie(BaseModel):
-    pass
+    def get_people(self):
+        return PeopleQuerySet(self.people)
 
 class SpecieQuerySet(BaseQuerySet):
     model = Specie
 
 
 class Planet(BaseModel):
-    pass
+    def get_residents(self):
+        return PeopleQuerySet(self.residents)
+
+    def get_films(self):
+        return FilmQuerySet(self.films)
 
 class PlanetQuerySet(BaseQuerySet):
     model = Planet
