@@ -7,11 +7,7 @@ router = APIRouter()
 API_URL = "https://swapi.dev/api/"
 
 def _fetch(resource: Resources, id: int):
-    result = query("{0}/{1}/{2}".format(
-        API_URL,
-        resource,
-        str(id))
-    )
+    result = query(f"{API_URL}/{resource}/{id}")
     return result
 
 @router.get("/{resource}")
