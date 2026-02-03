@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from api.resources import Person, Film, Starship, Vehicle, Specie, Planet
 from api.utils import query, build_params
 from api.resources import Resources
 import math
@@ -34,29 +35,35 @@ async def get_all_resource_data(
 @router.get("/person/{id}")
 async def get_person(id):
     result = _fetch(Resources.PEOPLE, id)
-    return result.json()
+    return Person(result.content)
+
+@router.get("/person/{id}/starships")
+def person_starships(id: int):
+    person = get_person(id)
+    starships = person.get_starships()
+    return starships.to_list()
 
 @router.get("/film/{id}")
 async def get_film(id):
     result = _fetch(Resources.FILMS, id)
-    return result.json()
+    return Film(result.content)
 
 @router.get("/starship/{id}")
 async def get_starship(id):
     result = _fetch(Resources.STARSHIPS, id)
-    return result.json()
+    return Starship(result.content)
 
 @router.get("/vehicle/{id}")
 async def get_vehicle(id):
     result = _fetch(Resources.VEHICLES, id)
-    return result.json()
+    return Vehicle(result.content)
 
 @router.get("/specie/{id}")
 async def get_species(id):
     result = _fetch(Resources.SPECIES, id)
-    return result.json()
+    return Specie(result.content)
 
 @router.get("/planet/{id}")
 async def get_planet(id):
     result = _fetch(Resources.PLANETS, id)
-    return result.json()
+    return Planet(result.content)
