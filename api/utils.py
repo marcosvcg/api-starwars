@@ -14,7 +14,7 @@ def query(url: str, params: dict | None = None):
 def build_params(**kwargs):
     return {k: v for k, v in kwargs.items() if v is not None}
 
-def paginate_data(data: dict, page:int, page_size: int = 10) -> dict:
+def paginate_data(data: dict, page: int) -> dict:
     total_pages = math.ceil(data['count'] / 10)
     data["next"] = page + 1 if page < total_pages else None
     data["previous"] = page - 1 if page > 1 else None
