@@ -1,9 +1,9 @@
 ''' Recursos fornecidos hoje (03/02/2026) pela SWAPI '''
 
 from api.base import BaseModel, BaseQuerySet
-from enum import Enum
+from enum import StrEnum
 
-class Resources(str, Enum):
+class Resources(StrEnum):
     PEOPLE = "people"
     FILMS = "films"
     STARSHIPS = "starships"
