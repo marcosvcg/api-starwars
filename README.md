@@ -54,8 +54,8 @@ API desenvolvida em **Python** utilizando **FastAPI**, que atua como uma camada 
 ### 1. Clonar o repositório
 
 ```bash
-git clone <url-do-repositorio>
-cd <nome-do-repositorio>
+git clone https://github.com/marcosvcg/api-starwars
+cd api-starwars
 ```
 
 ---
