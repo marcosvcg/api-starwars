@@ -7,7 +7,7 @@ app.include_router(router)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins= ["https://www.powerofdata.ai", "http://localhost:5173"],
+    allow_origins= ["https://www.google.com", "http://localhost:5173"],
     allow_credentials= True,
     allow_methods= ["*"],
     allow_headers= ["*"],
@@ -15,4 +15,4 @@ app.add_middleware(
 
 @app.get("/api/healthcheck")
 def healthcheck():
-    return {"message": "Processo Seletivo - PowerOfData | Case Técnico: Avaliação para Cargo de Desenvolvedor Back End Python"}
+    return {"message": "api funcionando!!"}
