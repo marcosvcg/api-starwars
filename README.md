@@ -1,5 +1,3 @@
-# Processo Seletivo - PowerOfData | Caste Técnico: Avaliação para Cargo de Desenvolvedor Back End Python
-
 API desenvolvida em **Python** utilizando **FastAPI**, que atua como uma camada intermediária para consumo da **SWAPI (Star Wars API)**. O objetivo do projeto é expor endpoints organizados, relacionais e testados, permitindo com que o usuário consulte diferentes informações baseadas nos dados da API do Star Wars de forma facilitada.
 
 ---
